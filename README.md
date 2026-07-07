@@ -4,3 +4,4 @@ A way to actively and automatically see the amout of trophies you have in the cu
 **Exept for steam you need this run on the computer you're playing for it the work**
 
 For now I only have Steam and GOG enabled but I'm working on getting other platforms done
+I'm also working on a fix for the images which in my opinions aren't always good as we don't always have the games icons
