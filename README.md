@@ -19,3 +19,4 @@ After following these tutorials, you should understand how to do it and for this
 Because we're doing a progress bar so in the design part of the bottom widget choose "progress" 
 
 For the content part (which is gonna be the important part) you're gonna need for both objective and progress to have everything set to User Data
+<img width="364" height="976" alt="Image" src="https://github.com/user-attachments/assets/919be098-7d26-445c-b315-eedef1931a7a" />
