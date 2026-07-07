@@ -1,7 +1,7 @@
 # DiscordTrophiesWidget
 A way to actively and automatically see the amout of trophies you have in the current game your playing, and displaying them onto a custom widget on discord with the slide bar. You'll have the picture of the game, the name, the slider saying how much trohpies you have/Amout of trophies maximum and a little text saying your in game.
 
-**Exept for steam you need this run on the computer you're playing for it the work**
+**Exept for steam you need this run on the computer you're playing for it the work** **Tuto made on and for Windows so for linux users only Steam should work sorry**
 
 For now I only have Steam and GOG enabled but I'm working on getting other platforms done.
 
@@ -30,4 +30,6 @@ To not have to change anything about the files name every Data field as I did, a
 
 After that, at the top of the page click save and publish if you didn't. And install my project and python. Then go inside the folder WidgetDiscordGit and open this folder in a terminal. Then do the command **pip install -r requirements.txt** or **py -m pip install -r requirements.txt** depending on your version. 
 
-Now open the file config.py and put the informations needed in it.
+Now open the file config.py and put the informations needed in it. So your **steam api key**, your **steam ID**, your **discord app ID**, your **discord user ID** and the **token of your bot**. You can also change de def update_idle(): in discordManage.py and change the value that will be displayed when no game is on so when it's in Idle mode.
+
+Now using a terminal opened in the folder WidgetDiscordGit, do **py .\main.py** or **python .\main.py** depending on your version. Everything should work fine and the Idle mode should be displayed instead of the the temporary one you had, so just launch a game and enjoy your trophies being displayed!
