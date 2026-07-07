@@ -23,7 +23,7 @@ HEADERS = {
 }
 
 
-# Etat Discord
+# Discord State
 
 last_discord_call = 0
 
