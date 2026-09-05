@@ -1,4 +1,4 @@
-import requests
+import requests # type: ignore
 import time
 
 from config import (
@@ -23,13 +23,12 @@ HEADERS = {
 }
 
 
-# Discord State
+# Etat Discord
 
 last_discord_call = 0
 
 pending_update = None
 retry_after = 0
-
 
 
 def safe_discord_patch(body):
@@ -38,17 +37,13 @@ def safe_discord_patch(body):
     global pending_update
     global retry_after
 
-
     now = time.time()
-
 
     if now < retry_after:
 
         pending_update = body
 
         return
-
-
 
     try:
 
@@ -58,7 +53,6 @@ def safe_discord_patch(body):
             json=body
         )
 
-
         if r.status_code == 429:
 
             retry = r.json().get(
@@ -66,11 +60,9 @@ def safe_discord_patch(body):
                 5
             )
 
-
             log(
                 f"⚠️ 429 Discord → retry dans {retry}s"
             )
-
 
             retry_after = now + retry
 
@@ -78,11 +70,7 @@ def safe_discord_patch(body):
 
             return
 
-
-
         last_discord_call = now
-
-
 
     except Exception as e:
 
@@ -93,11 +81,7 @@ def safe_discord_patch(body):
         pending_update = body
 
 
-
-
-
 def update_discord(game):
-
 
     body = {
 
@@ -149,14 +133,10 @@ def update_discord(game):
 
     }
 
-
     safe_discord_patch(body)
 
 
-
-
 def update_idle():
-
 
     body = {
 
@@ -209,11 +189,7 @@ def update_idle():
 
     }
 
-
     safe_discord_patch(body)
-
-
-
 
 
 def retry_pending():
@@ -221,13 +197,10 @@ def retry_pending():
     global pending_update
     global retry_after
 
-
     if pending_update and time.time() >= retry_after:
-
 
         body = pending_update
 
         pending_update = None
-
 
         safe_discord_patch(body)
