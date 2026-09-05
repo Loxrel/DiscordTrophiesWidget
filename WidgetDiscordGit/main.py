@@ -11,7 +11,6 @@ from discordManage import (
 )
 
 
-
 trackers = [
     steam,
     gog
@@ -23,22 +22,16 @@ last_progress = None
 is_idle = False
 
 
-
 log("Starting Game Tracker...")
 
 
 while True:
 
-
     current_game = None
-
-
 
     for tracker in trackers:
 
-
         game = tracker.get_game()
-
 
         if game:
 
@@ -46,16 +39,11 @@ while True:
 
             break
 
-
-
-
     # IDLE
 
     if current_game is None:
 
-
         if not is_idle:
-
 
             log(
                 "No Game Detected → idle"
@@ -64,9 +52,7 @@ while True:
                 "Sending Idle profile to Discord"
             )
 
-
             update_idle()
-
 
             is_idle = True
 
@@ -74,23 +60,16 @@ while True:
 
             last_progress = None
 
-
-
-
     # GAME
 
     else:
 
-
         is_idle = False
-
 
         progress = (
             f"{current_game['current']}/"
             f"{current_game['total']}"
         )
-
-
 
         if (
 
@@ -99,7 +78,6 @@ while True:
             or progress != last_progress
 
         ):
-
 
             log(
 
@@ -110,22 +88,17 @@ while True:
             )
 
             log(
-            f"Sending Discord update : {game['name']}"
+                f"Sending Discord update : {game['name']}"
             )
 
             update_discord(
                 current_game
             )
 
-
             last_game = current_game["name"]
 
             last_progress = progress
 
-
-
-
     retry_pending()
-
 
     time.sleep(0.5)
