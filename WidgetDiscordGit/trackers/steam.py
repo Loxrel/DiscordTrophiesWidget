@@ -1,4 +1,4 @@
-import requests
+import requests # type: ignore
 import time
 
 from config import (
@@ -9,44 +9,32 @@ from config import (
 
 def get_game():
 
-
     url = (
         "https://api.steampowered.com/ISteamUser/"
         "GetPlayerSummaries/v2/"
         f"?key={STEAM_API_KEY}&steamids={STEAM_ID}"
     )
 
-
     r = requests.get(url).json()
-
 
     players = (
         r.get("response", {})
         .get("players", [])
     )
 
-
     if not players:
 
         return None
 
-
-
     player = players[0]
-
 
     if "gameid" not in player:
 
         return None
 
-
-
     appid = player["gameid"]
 
-
     unlocked, total = get_achievements(appid)
-
-
 
     return {
 
@@ -66,10 +54,7 @@ def get_game():
     }
 
 
-
-
 def get_achievements(appid):
-
 
     url = (
 
@@ -81,9 +66,7 @@ def get_achievements(appid):
 
     )
 
-
     r = requests.get(url).json()
-
 
     achievements = (
 
@@ -92,12 +75,9 @@ def get_achievements(appid):
 
     )
 
-
     if not achievements:
 
         return 0, 0
-
-
 
     unlocked = sum(
 
@@ -107,15 +87,10 @@ def get_achievements(appid):
 
     )
 
-
     return unlocked, len(achievements)
 
 
-
-
-
 def get_game_image(appid):
-
 
     return (
 
