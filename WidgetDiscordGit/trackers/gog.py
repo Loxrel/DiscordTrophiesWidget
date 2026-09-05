@@ -1,6 +1,6 @@
 import sqlite3
 import os
-import psutil
+import psutil # type: ignore
 import json
 
 from logger import log
@@ -18,7 +18,6 @@ def find_gog_database():
 
     ]
 
-
     for path in paths:
 
         if os.path.exists(path):
@@ -29,7 +28,6 @@ def find_gog_database():
 
             return path
 
-
     log(
         "GOG database not found"
     )
@@ -37,9 +35,7 @@ def find_gog_database():
     return None
 
 
-
 GOG_DB = find_gog_database()
-
 
 
 # Get installed GOG executables
@@ -49,16 +45,13 @@ def get_gog_executables():
     if not GOG_DB:
         return []
 
-
     games = []
-
 
     try:
 
         conn = sqlite3.connect(GOG_DB)
 
         cursor = conn.cursor()
-
 
         cursor.execute(
             """
@@ -79,11 +72,9 @@ def get_gog_executables():
             """
         )
 
-
         for path, title, images, product_id, release_key in cursor.fetchall():
 
             image_url = ""
-
 
             try:
 
@@ -94,12 +85,9 @@ def get_gog_executables():
                     ""
                 )
 
-
             except Exception:
 
                 pass
-
-
 
             games.append({
 
@@ -115,9 +103,7 @@ def get_gog_executables():
 
             })
 
-
         conn.close()
-
 
     except Exception as e:
 
@@ -125,11 +111,7 @@ def get_gog_executables():
             f"GOG database error : {e}"
         )
 
-
     return games
-
-
-
 
 
 # Get running processes
@@ -137,7 +119,6 @@ def get_gog_executables():
 def get_running_processes():
 
     processes = []
-
 
     for process in psutil.process_iter(
         ["name"]
@@ -151,16 +132,11 @@ def get_running_processes():
                     process.info["name"].lower()
                 )
 
-
         except:
 
             pass
 
-
     return processes
-
-
-
 
 
 # Get GOG achievements
@@ -171,13 +147,11 @@ def get_achievements(game_release_key):
 
         return 0, 0
 
-
     try:
 
         conn = sqlite3.connect(GOG_DB)
 
         cursor = conn.cursor()
-
 
         cursor.execute(
             """
@@ -188,10 +162,7 @@ def get_achievements(game_release_key):
             (game_release_key,)
         )
 
-
         total = cursor.fetchone()[0]
-
-
 
         cursor.execute(
             """
@@ -203,16 +174,11 @@ def get_achievements(game_release_key):
             (game_release_key,)
         )
 
-
         unlocked = cursor.fetchone()[0]
-
 
         conn.close()
 
-
         return unlocked, total
-
-
 
     except Exception as e:
 
@@ -223,9 +189,6 @@ def get_achievements(game_release_key):
         return 0, 0
 
 
-
-
-
 # Detect current GOG game
 
 def get_game():
@@ -234,18 +197,13 @@ def get_game():
 
     running = get_running_processes()
 
-
     for game in games:
 
-
         if game["exe"] in running:
-
 
             current, total = get_achievements(
                 game["releaseKey"]
             )
-
-
 
             return {
 
@@ -260,6 +218,5 @@ def get_game():
                 "image": game["image"]
 
             }
-
 
     return None
